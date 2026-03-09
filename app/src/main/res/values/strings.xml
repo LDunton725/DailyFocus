@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DailyFocus</string>
+    <string name="no_saved_task_found">No saved task found</string>
 </resources>
