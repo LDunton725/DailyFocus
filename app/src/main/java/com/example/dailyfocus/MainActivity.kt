@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-// Updated today
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvTask: TextView
@@ -18,9 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tvTask = findViewById(R.id.tvTask)
+
         val btnAddTask = findViewById<Button>(R.id.btnAddTask)
         val btnSaveTask = findViewById<Button>(R.id.btnSaveTask)
         val btnLoadTask = findViewById<Button>(R.id.btnLoadTask)
+        val recyclerTasks = findViewById<RecyclerView>(R.id.recyclerTasks)
 
         btnAddTask.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
@@ -44,6 +47,33 @@ class MainActivity : AppCompatActivity() {
                 tvTask.text = getString(R.string.no_saved_task_found)
             }
         }
+
+        val taskList = arrayListOf(
+            "Pick up groceries",
+            "Call doctor",
+            "Study Android",
+            "Walk the dog",
+            "Drink water",
+            "Finish homework",
+            "Clean kitchen",
+            "Pay bills",
+            "Check email",
+            "Fold laundry",
+            "Take out trash",
+            "Wash dishes",
+            "Read chapter 6",
+            "Practice coding",
+            "Stretch",
+            "Make dinner",
+            "Check Blackboard",
+            "Reply to email",
+            "Organize desk",
+            "Review notes"
+        )
+
+        val adapter = TaskAdapter(taskList)
+        recyclerTasks.layoutManager = LinearLayoutManager(this)
+        recyclerTasks.adapter = adapter
     }
 
     override fun onResume() {
